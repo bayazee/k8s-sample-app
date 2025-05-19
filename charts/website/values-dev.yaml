@@ -10,3 +10,7 @@ image:
   pullPolicy: IfNotPresent
   tag: "0.0.1"
 
+
+service:
+  type: NodePort
+  port: 80
