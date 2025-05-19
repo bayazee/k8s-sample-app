@@ -27,3 +27,11 @@ spec:
                     - name: http
                       containerPort: 80
                       protocol: TCP
+                  env:
+                    - name: ENVIRONMENT
+                      value: {{ .Values.environment | quote }}
+                    - name: SECRET_MESSAGE
+                      valueFrom:
+                        secretKeyRef:
+                          name: {{ include "website.fullname" . }}-secret
+                          key: secretMessage

@@ -1,4 +1,5 @@
-# Default values for website.
+# Dev environment values for the website Helm chart
+environment: "dev"
 
 replicaCount: 1
 
