@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "website.fullname" . }}
+  labels:
+    app: {{ include "website.fullname" . }}
+    chart: {{ include "website.chart" . }}
+    release: {{ .Release.Name }}
+
+spec:
+    replicas: {{ .Values.replicaCount }}
+    selector:
+      matchLabels:
+        app: {{ include "website.fullname" . }}
+    template:
+        metadata:
+            labels:
+                app: {{ include "website.fullname" . }}
+                chart: {{ include "website.chart" . }}
+                release: {{ .Release.Name }}
+        spec:
+            containers:
+                - name: {{ include "website.fullname" . }}
+                  image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+                  imagePullPolicy: {{ .Values.image.pullPolicy }}
+                  ports:
+                    - name: http
+                      containerPort: 80
+                      protocol: TCP

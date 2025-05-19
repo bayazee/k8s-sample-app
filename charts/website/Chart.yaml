@@ -1,0 +1,9 @@
+apiVersion: v2
+name: website
+description: A Helm chart that deploys a website using Nginx
+type: application
+
+# Chart version
+version: 0.1.0
+
+appVersion: "0.0.1"

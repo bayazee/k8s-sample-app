@@ -1,0 +1,12 @@
+# Default values for website.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: bayazee/k8s-sample-app-website
+  pullPolicy: IfNotPresent
+  tag: "0.0.1"
+
