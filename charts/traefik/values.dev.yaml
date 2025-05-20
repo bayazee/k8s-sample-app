@@ -1,0 +1,4 @@
+# Enable access logs
+logs:
+  access:
+    enabled: true
