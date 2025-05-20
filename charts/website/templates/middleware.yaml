@@ -1,3 +1,4 @@
+{{- if .Values.ingress.stripPrefix -}}
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -6,4 +7,5 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - /dev
+      - {{ .Values.ingress.path}}
+{{- end }}
