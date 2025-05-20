@@ -1,4 +1,6 @@
 # Enable access logs
 logs:
+  general:
+    level: DEBUG
   access:
     enabled: true

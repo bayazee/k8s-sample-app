@@ -14,10 +14,12 @@ spec:
         app: {{ include "website.fullname" . }}
     template:
         metadata:
-            labels:
-                app: {{ include "website.fullname" . }}
-                chart: {{ include "website.chart" . }}
-                release: {{ .Release.Name }}
+          annotations: 
+            checksum/config: {{ .Values.secretMessage | sha256sum }}
+          labels:
+              app: {{ include "website.fullname" . }}
+              chart: {{ include "website.chart" . }}
+              release: {{ .Release.Name }}
         spec:
             containers:
                 - name: {{ include "website.fullname" . }}
