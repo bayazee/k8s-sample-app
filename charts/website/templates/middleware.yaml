@@ -4,6 +4,8 @@ kind: Middleware
 metadata:
   name: strip-dev
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "website.labels" . | nindent 4 }}
 spec:
   stripPrefix:
     prefixes:

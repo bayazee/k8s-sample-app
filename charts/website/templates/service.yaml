@@ -4,9 +4,7 @@ metadata:
   name: {{ include "website.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ include "website.fullname" . }}
-    chart: {{ include "website.chart" . }}
-    release: {{ .Release.Name }}
+    {{- include "website.labels" . | nindent 4 }}
 spec:
     type: {{ .Values.service.type}}
     ports:
@@ -14,4 +12,4 @@ spec:
           port: {{ .Values.service.port }}
           targetPort: 80
     selector:
-        app: {{ include "website.fullname" . }}
+        app.kubernetes.io/name: {{ include "website.fullname" . }}

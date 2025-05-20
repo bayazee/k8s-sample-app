@@ -4,23 +4,19 @@ metadata:
   name: {{ include "website.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ include "website.fullname" . }}
-    chart: {{ include "website.chart" . }}
-    release: {{ .Release.Name }}
+    {{- include "website.labels" . | nindent 4 }}
 
 spec:
     replicas: {{ .Values.replicaCount }}
     selector:
       matchLabels:
-        app: {{ include "website.fullname" . }}
+        app.kubernetes.io/name: {{ include "website.fullname" . }}
     template:
         metadata:
           annotations: 
             checksum/config: {{ .Values.secretMessage | sha256sum }}
           labels:
-              app: {{ include "website.fullname" . }}
-              chart: {{ include "website.chart" . }}
-              release: {{ .Release.Name }}
+              {{- include "website.labels" . | nindent 14 }}
         spec:
             containers:
                 - name: {{ include "website.fullname" . }}

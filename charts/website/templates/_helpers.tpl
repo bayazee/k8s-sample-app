@@ -11,5 +11,18 @@
 {{- end -}}
 
 {{- define "website.chart" -}}
-{{- printf "%s-v%s.appv%s" .Chart.Name .Chart.Version .Chart.AppVersion | replace "+" "_" | replace "." "_" -}}
+{{- printf "%s-v%s" .Chart.Name .Chart.Version | replace "+" "_" | replace "." "_" -}}
 {{- end -}}
+
+{{/*
+Commun labels
+*/}}
+{{- define "website.labels" -}}
+app.kubernetes.io/name: {{ include "website.fullname" . }}
+helm.sh/chart: {{ include "website.chart" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/release: {{ .Release.Name }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}

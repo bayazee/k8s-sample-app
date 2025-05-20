@@ -3,6 +3,8 @@ kind: IngressRoute
 metadata:
   name: {{ include "website.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "website.labels" . | nindent 4 }}
 spec:
   entryPoints:
     - web
