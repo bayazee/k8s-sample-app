@@ -27,12 +27,9 @@ for repo in "${repos[@]}"; do
 done
 helm repo update
 
-exit 0
-
-
 # Install Traefik (auto-create namespace)
-helm upgrade traefik traefik/traefik --namespace traefik --create-namespace --values ${BASE_DIR}/traefik/values.yaml \
---wait --timeout 2m --atomic
+helm upgrade --install traefik traefik/traefik --namespace traefik --create-namespace --values ${BASE_DIR}/traefik/values.yaml \
+--wait --timeout 5m --atomic
 
 
 # Install cert-manager
@@ -40,10 +37,10 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
   --wait --timeout 2m --atomic \
   --set extraArgs="{--enable-certificate-owner-ref}" # Make sure auto created secrets are deleted when the owner is deleted
 
-helm upgrade --install ssl ${BASE_DIR}/ssl --namespace cert-manager --wait --timeout 2m --atomic
+helm upgrade --install ssl ${BASE_DIR}/ssl --namespace cert-manager --wait --timeout 5m --atomic
 
 
-helm upgrade --install reflector oci://ghcr.io/emberstack/helm-charts/reflector
+helm upgrade --install reflector oci://ghcr.io/emberstack/helm-charts/reflector --namespace cert-manager
 
 
 # Install website
