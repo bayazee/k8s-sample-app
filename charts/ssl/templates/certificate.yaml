@@ -7,6 +7,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   secretName: {{ .Values.tls.secretName }}
+  secretTemplate:
+      annotations:
+        reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+        reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "dev,prod"  # Control destination namespaces
+        reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
+        reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "dev,prod" # Control auto-reflection namespaces
   duration: 8760h # 1 year
   renewBefore: 360h
   commonName: {{ .Values.tls.commonName }}
@@ -30,4 +36,5 @@ spec:
     - digital signature
     - key encipherment
     - server auth
+
 {{- end }}
