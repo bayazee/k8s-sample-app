@@ -7,9 +7,9 @@ metadata:
     {{- include "website.labels" . | nindent 4 }}
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-    - match: PathPrefix(`{{ .Values.ingress.path}}`)
+    - match: Host(`website.bayazee.com`) && PathPrefix(`{{ .Values.ingress.path}}`)
       kind: Rule
       services:
         - name: {{ include "website.fullname" . }}
@@ -19,4 +19,7 @@ spec:
         - name: strip-dev
           namespace: {{ .Release.Namespace }}
       {{- end }}
-  # Optionally add TLS + certResolver here
+  tls:
+    secretName: {{ .Values.ingress.tls.secretName }}
+    domains:
+      - main: {{ .Values.ingress.tls.commonName }}

@@ -1,0 +1,33 @@
+
+{{- if .Values.ingress.tls.enabled }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.ingress.tls.secretName }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: {{ .Values.ingress.tls.secretName }}
+  duration: 8760h # 1 year
+  renewBefore: 360h
+  commonName: {{ .Values.ingress.tls.commonName }}
+  dnsNames:
+    - {{ .Values.ingress.tls.commonName }}
+  issuerRef:
+    name: self-signed
+    kind: ClusterIssuer
+  subject:
+    organizations:
+      - Bayazee Inc.
+    countries:
+      - DE
+    organizationalUnits:
+      - DevOps
+    localities:
+      - Berlin
+    provinces:
+      - Berlin
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+{{- end }}
