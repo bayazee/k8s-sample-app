@@ -1,0 +1,7 @@
+issuer:
+  name: self-signed
+
+tls:
+  enabled: true
+  secretName: website-tls
+  commonName: website.bayazee.com
