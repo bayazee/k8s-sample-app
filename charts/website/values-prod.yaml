@@ -21,3 +21,5 @@ secretMessage: ""
 ingress:
   path: /
   stripPrefix: false
+  tls:
+    secretName: website-tls

@@ -22,6 +22,5 @@ ingress:
   path: /dev
   stripPrefix: true
   tls:
-    enabled: true
     secretName: website-tls
-    commonName: website.bayazee.com
+
