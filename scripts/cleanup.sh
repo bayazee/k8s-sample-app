@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# This script is used to clean up the environment by uninstalling all Helm releases,
+# deleting namespaces, CRDs, and the secret-syncer deployment.
+
+# TODO: Imrrove by removing hardcoded values. Fetch installed releases and namespaces from the cluster and helm.
+
 # cleanup.sh [BASE_DIR]
 BASE_DIR="${1:-../charts}"
 

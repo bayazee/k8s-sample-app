@@ -1,3 +1,4 @@
+# TODO: Move hardcoded values to values.yaml
 
 {{- if .Values.tls.enabled }}
 apiVersion: cert-manager.io/v1

@@ -19,6 +19,7 @@ spec:
     template:
         metadata:
           annotations: 
+            # This annotation is used to trigger a rolling update when the secret changes
             checksum/config: {{ .Values.secretMessage | sha256sum }}
           labels:
               {{- include "website.labels" . | nindent 14 }}

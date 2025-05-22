@@ -20,6 +20,7 @@ repos=(
   "jetstack https://charts.jetstack.io" # cert-manager
 )
 
+# Add helm repos
 for repo in "${repos[@]}"; do
   name=${repo%% *}
   url=${repo#* }
@@ -43,9 +44,10 @@ helm upgrade --install ssl ${BASE_DIR}/ssl --namespace cert-manager
 helm upgrade --install reflector oci://ghcr.io/emberstack/helm-charts/reflector --namespace cert-manager
 
 
-# Install website
+# Install website in dev
 helm upgrade --install website-dev ${BASE_DIR}/website --namespace dev --create-namespace \
   --values ${BASE_DIR}/website/values-dev.yaml --set secretMessage="${DEV_SECRET}" \
 
+# Install website in prod
 helm upgrade --install website-prod ${BASE_DIR}/website --namespace prod --create-namespace \
   --values ${BASE_DIR}/website/values-prod.yaml --set secretMessage="${PROD_SECRET}" \

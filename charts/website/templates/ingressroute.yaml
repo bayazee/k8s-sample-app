@@ -16,10 +16,13 @@ spec:
           port: {{ .Values.service.port }}
       {{- if .Values.ingress.stripPrefix }}
       middlewares:
-        - name: strip-dev
+        - name: strip-prefix
           namespace: {{ .Release.Namespace }}
       {{- end }}
   tls:
+    # This is the secret that contains the TLS certificate and key
+    # It will automatically be created by cert-manager in its own namespace
+    # and will be reflected to the current namespace
     secretName: {{ .Values.ingress.tls.secretName }}
     domains:
       - main: {{ .Values.ingress.tls.commonName }}

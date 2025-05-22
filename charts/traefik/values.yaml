@@ -1,6 +1,6 @@
 # Enable access logs
 logs:
   general:
-    level: DEBUG
+    level: DEBUG # It should not be set to DEBUG in production
   access:
     enabled: true
