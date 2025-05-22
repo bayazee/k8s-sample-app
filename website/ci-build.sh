@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# ------------------------------------------------------------------------------
+# NOTE:
+# This script is NOT a substitute for a proper CI pipeline.
+# In a real-world project, we should implement a full CI process with:
+#   - Thorough test coverage
+#   - Unit, integration, and end-to-end tests
+#   - Proper environment isolation
+#   - Secure, scalable build and deployment stages
+#
+# However, since this is a small project serving a simple static website,
+# we use this minimal script to build the Docker image, run basic tests,
+# and push the image if all checks pass.
+# ------------------------------------------------------------------------------
+
 VERSION=$(<version.txt)
 IMAGE_NAME="${IMAGE_NAME:-bayazee/k8s-sample-app-website}"
 
@@ -25,7 +39,6 @@ stop_container() {
     docker stop "$CONTAINER_NAME" || true
     docker rm "$CONTAINER_NAME" || true
 }
-
 
 ##### Test 1 #####
 # Run container and check if it starts successfully
@@ -72,8 +85,9 @@ fi
 
 echo "Test passed: NGINX returned HTTP 200"
 
+# Make sure to clean up the container even if the script fails
 echo "Cleaning up test container..."
-stop_container
+trap stop_container EXIT
 
 
 ##### Push Docker image to Docker Hub #####
