@@ -6,6 +6,8 @@ replicaCount: 3
 nameOverride: ""
 fullnameOverride: ""
 
+# This docker image is same as the one used in the dev environment
+# But it is already tested in lower environments and is ready for production
 image:
   repository: bayazee/k8s-sample-app-website
   pullPolicy: IfNotPresent

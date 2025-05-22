@@ -39,13 +39,17 @@ spec:
                         secretKeyRef:
                           name: {{ include "website.fullname" . }}-secret
                           key: secretMessage
+
+                  # It is a static website, so we can use a simple liveness and readiness probe
+                  # For a more complex application, you might want to use a more sophisticated health check
+                  # like using failureThreshold and successThreshold
                   livenessProbe:
                     httpGet:
                       path: /
                       port: http
                     initialDelaySeconds: 5
                     periodSeconds: 10
-                  
+
                   readinessProbe:
                     httpGet:
                       path: /

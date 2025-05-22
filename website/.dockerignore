@@ -1,0 +1,22 @@
+# Ignore Git and editor files
+.git
+.gitignore
+*.bak
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore local build/test artifacts
+tmp
+*.log
+
+# Ignore version control metadata
+.vscode
+.idea
+
+# Ignore Docker-related files (optional)
+docker-compose.yml
+.env
+
+# Igore CI/CD files
+ci-build.sh
