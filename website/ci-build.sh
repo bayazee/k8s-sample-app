@@ -15,6 +15,8 @@ set -euo pipefail
 # and push the image if all checks pass.
 # ------------------------------------------------------------------------------
 
+# TODO: Make push to Docker Hub optional
+
 VERSION=$(<version.txt)
 IMAGE_NAME="${IMAGE_NAME:-bayazee/k8s-sample-app-website}"
 
