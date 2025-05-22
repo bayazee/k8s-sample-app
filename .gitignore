@@ -1,0 +1,29 @@
+.DS_Store
+
+# Various IDEs
+.project
+.idea/
+*.tmproj
+.vscode/
+
+### Terraform start ###
+# Local .terraform directories
+**/.terraform/*
+**/.terragrunt-cache/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .terraform.lock.hcl
+*.terraform.lock.hcl
+**/*.terraform.lock.hcl
+
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
