@@ -52,3 +52,6 @@ spec:
                       port: http
                     initialDelaySeconds: 3
                     periodSeconds: 5
+                  
+                  resources:
+                    {{- toYaml .Values.resources | nindent 20 }}
