@@ -36,7 +36,10 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 helm upgrade --install ssl ${BASE_DIR}/ssl --namespace cert-manager
 
-
+# We need this to replicate the secrets to the dev and prod namespaces
+# We want to create only 1 certificare for the root domain and use it for all environments
+# This certficate will be created in the cert-manager namespace and won't be accessible from the dev and prod namespaces
+# We need to use the reflector to replicate the secrets
 helm upgrade --install reflector oci://ghcr.io/emberstack/helm-charts/reflector --namespace cert-manager
 
 
